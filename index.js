@@ -50,6 +50,28 @@ async function run() {
       })
 
 
+      // delete order
+      app.delete('/deleteOrder/:id', async(req,res)=>{
+         const id = req.params.id ;
+         const query = {_id: ObjectId(id)}
+         const deleteOrder = await orderCollection.deleteOne(query)
+         console.log(deleteOrder)
+         res.json(deleteOrder)
+        })
+
+
+
+
+      // delete product
+      app.delete('/products/:id', async(req,res)=>{
+         const id = req.params.id ;
+         const query = {_id: ObjectId(id)}
+         const deleteProduct = await productsCollection.deleteOne(query)
+         console.log(deleteProduct)
+         res.json(deleteProduct)
+        })
+
+
       // save user to database
       app.post('/users', async(req, res)=>{
           const users = req.body ;
@@ -66,7 +88,7 @@ async function run() {
       });
 
 
-        // get api  gor review
+        // get api  for review
         app.get('/review', async(req,res)=>{
           const cursor = reviewCollection.find({})
           const review = await cursor.toArray()
