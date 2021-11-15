@@ -2,7 +2,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 
-## This is a full-stack scholarship consultancy website.
+## This is a full-stack website.
 
 
 * Easy to use this application .
