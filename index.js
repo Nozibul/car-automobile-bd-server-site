@@ -58,7 +58,7 @@ async function run() {
       })
 
 
-      // delete order
+      // delete order of specific user
       app.delete('/deleteOrder/:id', async(req,res)=>{
          const id = req.params.id ;
          const query = {_id: ObjectId(id)}
@@ -66,7 +66,14 @@ async function run() {
          res.json(deleteOrder)
         })
 
-
+   // delete order for all users
+  //  app.delete('/orders/:id', async(req,res)=>{
+  //   const id = req.params.id ;
+  //   const query = {_id: ObjectId(id)}
+  //   const deleteOrders = await productsCollection.deleteOne(query)
+  //   console.log(deleteOrders)
+  //   res.json(deleteOrders)
+  //  })
 
 
       // delete product
