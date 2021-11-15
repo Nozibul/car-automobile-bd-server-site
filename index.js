@@ -33,7 +33,15 @@ async function run() {
        
       })
 
-      // get orders
+      // get api for all order
+      app.get('/orders', async(req, res)=>{
+        const cursor = orderCollection.find({})
+        const orders = await cursor.toArray()
+        res.send(orders)
+      })
+
+
+      // get api for specific user orders
       app.get('/order', async(req, res)=>{
         const email = req.query.email ;
         const query = {email: email}
@@ -55,7 +63,6 @@ async function run() {
          const id = req.params.id ;
          const query = {_id: ObjectId(id)}
          const deleteOrder = await orderCollection.deleteOne(query)
-         console.log(deleteOrder)
          res.json(deleteOrder)
         })
 
@@ -125,6 +132,7 @@ async function run() {
 
    app.put('/users/admin', async(req, res)=>{
      const user = req.body;
+     console.log(user)
      const filter = {email: user.email};
      const updateDoc = { $set: {role: 'admin'}}
      const result = await usersCollection.updateOne(filter, updateDoc)
