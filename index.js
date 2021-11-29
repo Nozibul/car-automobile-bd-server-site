@@ -23,7 +23,8 @@ async function run() {
       const productsCollection = database.collection("products");
       const orderCollection = database.collection("orders");
       const usersCollection = database.collection("users");
-      const reviewCollection = database.collection("reviews")
+      const reviewCollection = database.collection("reviews");
+      const commentCollection = database.collection("comment");
       
       // get products api
       app.get('/products', async(req,res)=>{
@@ -109,6 +110,37 @@ async function run() {
           res.send(review) 
          
         })
+  
+
+        // post api for comment 
+        app.post('/comment', async (req, res) => {
+          const comment = req.body;
+          const comments = await commentCollection.insertOne(comment);
+          res.json(comments);
+        });
+   
+          // get api  for comment
+        app.get('/comment', async(req,res)=>{
+          const cursor = commentCollection.find({})
+          const comment = await cursor.toArray()
+          res.send(comment) 
+         
+        })
+
+
+    // add product admin     
+    app.post('/products', async(req, res)=>{
+        const product = req.body;
+        const result = await productsCollection.insertOne(product);
+        res.json(result)
+      })
+  
+
+
+
+
+
+
 
 
     //
